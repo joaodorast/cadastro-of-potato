@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagas de Emprego - Tecnologia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 70%;
+            margin-right: 10px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: #d81b60;
+        }
+
+        .vaga {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .vaga:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .vaga h2 {
+            color: #e91e63;
+            margin: 0 0 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .vaga p {
+            margin: 5px 0;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background-color: #e91e63;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+
+        .application-link {
+            text-align: center;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+            display: inline-block;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .application-link:hover {
+            background-color: #45a049;
+        }
+
+        .voltarestrutura {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .voltarestrutura a {
+            color: #e91e63;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .search-bar input {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+    <script>
+        function filterJobs() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const vagas = document.getElementsByClassName('vaga');
+
+            for (let i = 0; i < vagas.length; i++) {
+                const vagaTitle = vagas[i].getElementsByTagName('h2')[0];
+                if (vagaTitle) {
+                    const txtValue = vagaTitle.textContent || vagaTitle.innerText;
+                    vagas[i].style.display = txtValue.toLowerCase().indexOf(filter) > -1 ? "" : "none";
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Vagas de Emprego na Tecnologia</h1>
+        
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Buscar por título..." onkeyup="filterJobs()">
+            <button onclick="filterJobs()"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+
+        <div class="vaga">
+            <h2>Desenvolvedor Frontend <span><i class="fas fa-laptop-code"></i></span></h2>
+            <p><strong>Empresa:</strong> TechCorp</p>
+            <p><strong>Localização:</strong> Remoto</p>
+            <p><strong>Descrição:</strong> Procuramos um desenvolvedor frontend com experiência em React e CSS.</p>
+            <div class="tags">
+                <span class="tag">Frontend</span>
+                <span class="tag">React</span>
+            </div>
+            <a href="#" class="application-link">Aplicar Agora</a>
+        </div>
+
+        <div class="vaga">
+            <h2>Analista de Dados <span><i class="fas fa-database"></i></span></h2>
+            <p><strong>Empresa:</strong> Data Solutions</p>
+            <p><strong>Localização:</strong> São Paulo</p>
+            <p><strong>Descrição:</strong> O candidato ideal deve ter experiência em SQL e ferramentas de visualização de dados.</p>
+            <div class="tags">
+                <span class="tag">Dados</span>
+                <span class="tag">SQL</span>
+            </div>
+            <a href="#" class="application-link">Aplicar Agora</a>
+        </div>
+
+        <div class="vaga">
+            <h2>Desenvolvedor Backend <span><i class="fas fa-server"></i></span></h2>
+            <p><strong>Empresa:</strong> CodeFactory</p>
+            <p><strong>Localização:</strong> Híbrido</p>
+            <p><strong>Descrição:</strong> Buscamos um desenvolvedor backend com experiência em Node.js e MongoDB.</p>
+            <div class="tags">
+                <span class="tag">Backend</span>
+                <span class="tag">Node.js</span>
+            </div>
+            <a href="#" class="application-link">Aplicar Agora</a>
+        </div>
+
+        <div class="voltarestrutura">
+            <a href="login.html">Voltar para Login</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Sua Empresa de Tecnologia. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>

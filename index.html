@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('sua-OIP.jpg'); /* Substitua pelo caminho da sua imagem */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .required:after {
+            content: " *";
+            color: red;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #e91e63;
+        }
+
+        input[type="text"].error,
+        input[type="email"].error,
+        input[type="password"].error {
+            border-color: red;
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #e91e63;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #d81b60;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .footer a {
+            color: #e91e63;
+            text-decoration: none;
+        }
+
+        .error,
+        .success {
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            color: #ccc;
+        }
+
+        .toggle-password:hover {
+            color: #e91e63;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            const successMessage = document.getElementById('success-message');
+
+            let valid = true;
+
+            // Limpa mensagens de erro anteriores
+            document.querySelectorAll('.error').forEach(error => {
+                error.style.display = 'none';
+            });
+            successMessage.style.display = 'none'; // Limpa a mensagem de sucesso
+
+            // Limpa estilos de erro anteriores
+            [name, email, password].forEach(input => {
+                input.classList.remove('error');
+            });
+
+            if (!name.value) {
+                valid = false;
+                name.nextElementSibling.style.display = 'block';
+                name.classList.add('error');
+            }
+
+            if (!email.value || !emailPattern.test(email.value)) {
+                valid = false;
+                email.nextElementSibling.style.display = 'block';
+                email.classList.add('error');
+            }
+
+            if (!password.value || password.value.length < 6) {
+                valid = false;
+                password.nextElementSibling.style.display = 'block';
+                password.classList.add('error');
+            }
+
+            if (valid) {
+                successMessage.innerText = "Cadastro realizado com sucesso!";
+                successMessage.style.display = 'block'; // Mostra a mensagem de sucesso
+                return false; // Impede o envio do formulário para que o usuário veja a mensagem
+            }
+
+            return valid; // Retorna true se todos os campos estão corretos
+        }
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleButton = document.getElementById('togglePassword');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.classList.remove('fa-eye-slash');
+                toggleButton.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.classList.remove('fa-eye');
+                toggleButton.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cadastro</h1>
+        <form action="#" method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="name" class="required">Nome <i class="fas fa-user"></i></label>
+                <input type="text" id="name" name="name" required placeholder="Seu nome completo">
+                <div class="error">Por favor, insira seu nome.</div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="required">Email <i class="fas fa-envelope"></i></label>
+                <input type="email" id="email" name="email" required placeholder="exemplo@dominio.com">
+                <div class="error">Por favor, insira um email válido.</div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="required">Senha <i class="fas fa-lock"></i></label>
+                <input type="password" id="password" name="password" required placeholder="Sua senha (min 6 caracteres)">
+                <i class="fas fa-eye-slash toggle-password" id="togglePassword" onclick="togglePasswordVisibility()"></i>
+                <div class="error">A senha deve ter pelo menos 6 caracteres.</div>
+            </div>
+            <input type="submit" value="Cadastrar">
+            <input type="reset" value="Limpar">
+            <div class="success" id="success-message"></div>
+        </form>
+        <div class="footer">
+            <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
