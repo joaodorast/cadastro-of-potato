@@ -11,7 +11,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('sua-OIP.jpg'); /* Substitua pelo caminho da sua imagem */
+            background-image: url('-OIP.jpg'); 
             background-size: cover;
             background-position: center;
             display: flex;
@@ -142,13 +142,13 @@
 
             let valid = true;
 
-            // Limpa mensagens de erro anteriores
+            
             document.querySelectorAll('.error').forEach(error => {
                 error.style.display = 'none';
             });
-            successMessage.style.display = 'none'; // Limpa a mensagem de sucesso
+            successMessage.style.display = 'none'; 
 
-            // Limpa estilos de erro anteriores
+            
             [name, email, password].forEach(input => {
                 input.classList.remove('error');
             });
@@ -173,11 +173,11 @@
 
             if (valid) {
                 successMessage.innerText = "Cadastro realizado com sucesso!";
-                successMessage.style.display = 'block'; // Mostra a mensagem de sucesso
-                return false; // Impede o envio do formulário para que o usuário veja a mensagem
+                successMessage.style.display = 'block'; 
+                return false; 
             }
 
-            return valid; // Retorna true se todos os campos estão corretos
+            return valid; 
         }
 
         function togglePasswordVisibility() {
